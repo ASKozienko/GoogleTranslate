@@ -1,0 +1,23 @@
+{
+    "name": "ask/google-translate",
+    "type": "library",
+    "description": "Google translate",
+    "keywords": ["google translate"],
+    "homepage": "https://github.com/A-S-Kozienko/GoogleTranslate",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Kozienko",
+            "email": "a.s.kozienko@gmail.com "
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "kriswallsmith/buzz": "v0.7"
+    },
+    "autoload": {
+        "psr-0": {
+            "ASK\\GoogleTranslate": "lib/"
+        }
+    }
+}
