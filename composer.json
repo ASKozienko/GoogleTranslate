@@ -1,7 +1,7 @@
 {
     "name": "ask/google-translate",
     "type": "library",
-    "description": "Google translate",
+    "description": "Google translate V2",
     "keywords": ["google translate"],
     "homepage": "https://github.com/A-S-Kozienko/GoogleTranslate",
     "license": "MIT",

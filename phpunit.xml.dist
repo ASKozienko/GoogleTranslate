@@ -12,4 +12,8 @@
             <directory>./lib</directory>
         </whitelist>
     </filter>
+
+    <php>
+        <!--<env name="GOOGLE_API_KEY" value="your-api-key"/>-->
+    </php>
 </phpunit>

@@ -3,5 +3,12 @@ namespace ASK\GoogleTranslate\HttpClient;
 
 interface HttpClientInterface
 {
-    public function get($url);
+    /**
+     * @param string $url
+     * @param array $parameters
+     * @param array $headers
+     * @return array
+     * @throws Exception\HttpClientException
+     */
+    public function request($url, array $parameters, array $headers = array());
 }
