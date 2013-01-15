@@ -21,8 +21,6 @@ class BuzzHttpClientTest extends \PHPUnit_Framework_TestCase
             'KEY' => 'VALUE',
         ));
 
-        var_dump($result);
-
         $this->assertInternalType('array', $result);
         $this->assertArrayHasKey('key', $result['form']);
         $this->assertEquals('value', $result['form']['key']);

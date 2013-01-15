@@ -85,12 +85,25 @@ class GoogleTranslate
     /**
      * List the source and target languages supported by the translate methods
      *
-     * @param string $target - target language
+     * @param string $targetLanguage - target language
      * @param bool $prettyprint - returns a response with indentations and line breaks
      */
-    public function languages($target, $prettyprint = false)
+    public function languages($targetLanguage = '', $prettyprint = false)
     {
+        $parameters = array();
+        $parameters['key'] = $this->apiKey;
 
+        if ($targetLanguage) {
+            $parameters['target'] = $targetLanguage;
+        }
+
+        if ($prettyprint) {
+            $parameters['prettyprint'] = 'true';
+        }
+
+        $result = $this->httpClient->request(self::LANGUAGES_URL, $parameters, $this->headers);
+
+        return $result['data']['languages'];
     }
 
     /**
@@ -102,7 +115,17 @@ class GoogleTranslate
      */
     public function detect($sourceText,  $prettyprint = false)
     {
+        $parameters = array();
+        $parameters['key'] = $this->apiKey;
+        $parameters['q'] = (array) $sourceText;
 
+        if ($prettyprint) {
+            $parameters['prettyprint'] = 'true';
+        }
+
+        $result = $this->httpClient->request(self::DETECT_URL, $parameters, $this->headers);
+
+        return $result['data']['detections'];
     }
 }
 

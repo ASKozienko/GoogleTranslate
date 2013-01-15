@@ -8,7 +8,7 @@ class GoogleTranslateTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldGenerateRequestArguments()
+    public function shouldGenerateTranslateRequestArguments()
     {
         $httpClient = $this->createHttpClientMock();
         $httpClient
@@ -31,7 +31,7 @@ class GoogleTranslateTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldGenerateMultiSourceRequestArguments()
+    public function shouldGenerateMultiSourceTranslateRequestArguments()
     {
         $httpClient = $this->createHttpClientMock();
         $httpClient
@@ -54,7 +54,7 @@ class GoogleTranslateTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldGenerateRequestWithAllArguments()
+    public function shouldGenerateTranslateRequestWithAllArguments()
     {
         $httpClient = $this->createHttpClientMock();
         $httpClient
@@ -74,6 +74,112 @@ class GoogleTranslateTest extends \PHPUnit_Framework_TestCase
 
         $googleTranslate = new GoogleTranslate($httpClient, 'api-key');
         $googleTranslate->translate('text', 'ru', 'en', 'text', true);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGenerateLanguagesRequestArguments()
+    {
+        $httpClient = $this->createHttpClientMock();
+        $httpClient
+            ->expects($this->once())
+            ->method('request')
+            ->with('https://www.googleapis.com/language/translate/v2/languages', array(
+                'key' => 'api-key',
+            ), array(
+                'X-HTTP-Method-Override' => 'GET'
+            ))
+        ;
+
+        $googleTranslate = new GoogleTranslate($httpClient, 'api-key');
+        $googleTranslate->languages();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGenerateLanguagesRequestWithAllArguments()
+    {
+        $httpClient = $this->createHttpClientMock();
+        $httpClient
+            ->expects($this->once())
+            ->method('request')
+            ->with('https://www.googleapis.com/language/translate/v2/languages', array(
+                'key' => 'api-key',
+                'target' => 'lang',
+                'prettyprint' => 'true',
+            ), array(
+                'X-HTTP-Method-Override' => 'GET'
+            ))
+        ;
+
+        $googleTranslate = new GoogleTranslate($httpClient, 'api-key');
+        $googleTranslate->languages('lang', true);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGenerateDetectRequestArguments()
+    {
+        $httpClient = $this->createHttpClientMock();
+        $httpClient
+            ->expects($this->once())
+            ->method('request')
+            ->with('https://www.googleapis.com/language/translate/v2/detect', array(
+                'key' => 'api-key',
+                'q' => array('text'),
+            ), array(
+                'X-HTTP-Method-Override' => 'GET'
+            ))
+        ;
+
+        $googleTranslate = new GoogleTranslate($httpClient, 'api-key');
+        $googleTranslate->detect('text');
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGenerateMultiSourceDetectRequestArguments()
+    {
+        $httpClient = $this->createHttpClientMock();
+        $httpClient
+            ->expects($this->once())
+            ->method('request')
+            ->with('https://www.googleapis.com/language/translate/v2/detect', array(
+                'key' => 'api-key',
+                'q' => array('text', 'text2'),
+            ), array(
+                'X-HTTP-Method-Override' => 'GET'
+            ))
+        ;
+
+        $googleTranslate = new GoogleTranslate($httpClient, 'api-key');
+        $googleTranslate->detect(array('text', 'text2'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGenerateDetectRequestWithAllArguments()
+    {
+        $httpClient = $this->createHttpClientMock();
+        $httpClient
+            ->expects($this->once())
+            ->method('request')
+            ->with('https://www.googleapis.com/language/translate/v2/detect', array(
+                'key' => 'api-key',
+                'q' => array('text'),
+                'prettyprint' => 'true',
+            ), array(
+                'X-HTTP-Method-Override' => 'GET'
+            ))
+        ;
+
+        $googleTranslate = new GoogleTranslate($httpClient, 'api-key');
+        $googleTranslate->detect('text', true);
     }
 
     /**
